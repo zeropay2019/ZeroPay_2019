@@ -7,4 +7,11 @@
     <string name="bottomSecond">가맹점</string>
     <string name="bottomThird">가이드</string>
     <string name="bottomFourth">설정</string>
+    <string name="register_member">회원가입</string>
+    <string name="find_password">비밀번호 찾기</string>
+    <string name="find_id">아이디 찾기</string>
+    <string name="login">로그인</string>
+    <string name="password">Password</string>
+    <string name="id">ID</string>
+    <string name="zeropay_2019">ZeroPay 2019</string>
 </resources>
