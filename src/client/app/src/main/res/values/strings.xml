@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Zeropay_Client</string>
+    <string name="app_name">제로페이 2019</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bottomFirst">홈</string>
+    <string name="bottomSecond">가맹점</string>
+    <string name="bottomThird">가이드</string>
+    <string name="bottomFourth">설정</string>
 </resources>
