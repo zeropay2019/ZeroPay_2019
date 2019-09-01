@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seoul.zero.app.model.mapper.MemberMapper">
+
+    <select id="login" parameterType="com.seoul.zero.app.model.vo.Member" resultType="java.lang.Integer">
+        select count(*) from member where id=#{id} and pwd=#{pwd}
+    </select>
+
+    <insert id="register" parameterType="com.seoul.zero.app.model.vo.Member">
+        insert into member values(mno_seq.nextval, #{id} ,#{name}, #{pwd}, #{phone},
+        #{payPwd}, #{country, jdbcType=VARCHAR}, #{address, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR})
+    </insert>
+</mapper>
