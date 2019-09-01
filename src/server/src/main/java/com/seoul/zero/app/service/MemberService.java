@@ -12,4 +12,10 @@ public interface MemberService {
 
     // 회원가입
     ResponseWrapper register(Member param);
+
+    // 아이디찾기
+    ResponseWrapper searchId(Member param);
+
+    // 비밀번호 찾기
+    ResponseWrapper searchPw(Member param);
 }

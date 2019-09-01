@@ -37,5 +37,17 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    
+    // 아이디 찾기
+    @RequestMapping(value="/searchId", method=RequestMethod.POST)
+    public ResponseEntity<ResponseWrapper> searchId(Member param){
+        ResponseWrapper response = memberService.searchId(param);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // 비밀번호 찾기
+    @RequestMapping(value="/searchPw", method = RequestMethod.POST)
+    public ResponseEntity<ResponseWrapper> searchPw(Member param){
+        ResponseWrapper response = memberService.searchPw(param);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
