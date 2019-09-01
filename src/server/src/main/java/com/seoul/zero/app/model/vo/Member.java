@@ -9,6 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Member {
     private int mno;
+    private String id;
     private String name;
     private String pwd;
     private String phone;
