@@ -15,5 +15,9 @@ class LoginActivity : AppCompatActivity() {
             startActivity<MainActivity>()
         }
 
+        sign_up_button.setOnClickListener {
+            startActivity<RegisterActivity>()
+        }
+
     }
 }
