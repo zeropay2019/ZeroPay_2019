@@ -26,9 +26,9 @@
         app:iconSpaceReserved="false">
 
         <EditTextPreference
-            android:dialogTitle="Edit your name"
+            android:dialogTitle="결제비밀번호 재설정"
             android:key="key_edit_name"
-            android:summary="Edit your name"
+            android:summary="Edit your Transaction Password"
             android:title="Edit name"
             app:iconSpaceReserved="false" />
 
