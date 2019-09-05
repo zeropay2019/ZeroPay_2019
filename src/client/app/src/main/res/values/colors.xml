@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#F3F3F3</color>
     <color name="colorAccent">#574bae</color>
     <color name="textColorPrimary">#000000</color>
-    <color name="toolbarIconColor">@color/textColorPrimary</color>
+    <!--<color name="toolbarIconColor">@color/textColorPrimary</color>-->
     <color name="colorControlActivated">#7E7E7E</color>
 </resources>
