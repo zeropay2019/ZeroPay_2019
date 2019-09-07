@@ -22,21 +22,21 @@ class LoginActivity : AppCompatActivity() {
             startActivity<RegisterActivity>()
         }
 
-/*        val loginRequest = LoginRequest("Test", "password")
-        userNetWork.requestLogin(loginRequest).enqueue(object :
-            Callback<ServerResponse> {
-            override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
-
-            }
-
-            override fun onResponse(
-                call: Call<ServerResponse>,
-                response: Response<ServerResponse>
-            ) {
-                if (response.isSuccessful) {
-
-                }
-            }
-        })*/
+//        val loginRequest = LoginRequest("Test", "password")
+//        userNetWork.requestLogin(loginRequest).enqueue(object :
+//            Callback<ServerResponse> {
+//            override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
+//
+//            }
+//
+//            override fun onResponse(
+//                call: Call<ServerResponse>,
+//                response: Response<ServerResponse>
+//            ) {
+//                if (response.isSuccessful) {
+//
+//                }
+//            }
+//        })
     }
 }
