@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,17 +14,17 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            app:fillColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:fillColor="#FFFFFFFF"
             app:pageColor="#00000000"
             app:radius="6dp"
             app:slideInterval="3000"
             app:strokeColor="#FF777777"
-            app:strokeWidth="1dp"/>
+            app:strokeWidth="1dp" />
 
         <Button
             android:id="@+id/qr_button"
@@ -42,12 +40,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/carouselView" />
 
+        <com.journeyapps.barcodescanner.DecoratedBarcodeView
+            android:id="@+id/db_qr"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:zxing_scanner_layout="@layout/view_qrcode" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/register_cardView"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
@@ -62,23 +71,21 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="cursive"
-                android:text="카드 등록하기"
-                android:textSize="18sp" />
+                android:textStyle="bold"
+                android:text="나의 카드"
+                android:textSize="19sp" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/add_card_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp">
 
                 <TextView
@@ -114,7 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp"
@@ -131,8 +138,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="cursive"
+                android:textStyle="bold"
                 android:text="나의 결제 내역"
-                android:textSize="18sp" />
+                android:textSize="19sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/transaction_recyclerView"

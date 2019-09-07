@@ -44,7 +44,6 @@ class CardViewpagerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             USER_CARD_VIEW_TYPE -> {
 
             }
-
         }
     }
 

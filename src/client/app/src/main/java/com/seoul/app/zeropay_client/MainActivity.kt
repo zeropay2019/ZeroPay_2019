@@ -1,14 +1,26 @@
 package com.seoul.app.zeropay_client
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.zxing.integration.android.IntentIntegrator
+import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.seoul.app.zeropay_client.ui.HomeFragment
 import com.seoul.app.zeropay_client.ui.InfoFragment
 import com.seoul.app.zeropay_client.ui.MapFragment
 import com.seoul.app.zeropay_client.ui.SettingFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , DecoratedBarcodeView.TorchListener {
+    override fun onTorchOn() {
+
+    }
+
+    override fun onTorchOff() {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +58,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             false
+        }
+    }
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == IntentIntegrator.REQUEST_CODE) {
+            val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+            if (result == null) {
+                Toast.makeText(this, "데이터가 없습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.e("scan Url-> ", "" + result.contents)
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 }
