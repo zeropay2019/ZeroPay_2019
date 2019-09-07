@@ -126,8 +126,6 @@
                     android:onClick="@{()->fragment.pressTransactionPW(true,tranViewModel.transactionNumList.get(2))}"
                     android:text="@{tranViewModel.transactionNumList.get(2)}" />
 
-
-
             </LinearLayout>
 
 
@@ -212,6 +210,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:onClick="@{() -> fragment.resetPassword()}"
                     android:text="@string/reset_transaction_pw" />
 
                 <com.google.android.material.button.MaterialButton
