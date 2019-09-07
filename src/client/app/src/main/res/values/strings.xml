@@ -14,4 +14,12 @@
     <string name="password">Password</string>
     <string name="id">ID</string>
     <string name="zeropay_2019">ZeroPay 2019</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="address">address</string>
+    <string name="email">email</string>
+    <string name="set_transaction_password">거래 비밀번호 설정</string>
+    <string name="register_complete">가입완료</string>
+    <string name="register_cancel">취소</string>
 </resources>

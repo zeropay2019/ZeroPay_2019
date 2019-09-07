@@ -48,4 +48,28 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-beta03'
     implementation 'com.google.android.material:material:1.1.0-alpha09'
+
+    //google map
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    //lifecycle & navigation
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+    //retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    //recycler view
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta03'
+    //material design
+    implementation 'com.google.android.material:material:1.1.0-alpha09'
+    //google map
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    //anko
+    implementation 'org.jetbrains.anko:anko:0.10.8'
+    //preference
+    implementation 'androidx.preference:preference:1.1.0-rc01'
 }
