@@ -14,7 +14,6 @@ public class Member {
     private String pwd;
     private String phone;
     private String payPwd;
-    private String country;
     private String address;
     private String email;
 }

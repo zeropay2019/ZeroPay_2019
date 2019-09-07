@@ -1,4 +1,4 @@
-package com.seoul.app.zeropay
+package com.seoul.app.zeropay_client
 
 import org.junit.Test
 

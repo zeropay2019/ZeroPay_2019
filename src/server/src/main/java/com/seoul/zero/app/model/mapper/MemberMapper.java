@@ -12,4 +12,10 @@ public interface MemberMapper {
 
     // 회원가입
     int register(Member param);
+
+    // 아이디 찾기
+    String searchId(Member param);
+
+    // 비밀번호 찾기
+    String searchPw(Member param);
 }

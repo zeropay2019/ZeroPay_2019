@@ -8,6 +8,14 @@
 
     <insert id="register" parameterType="com.seoul.zero.app.model.vo.Member">
         insert into member values(mno_seq.nextval, #{id} ,#{name}, #{pwd}, #{phone},
-        #{payPwd}, #{country, jdbcType=VARCHAR}, #{address, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR})
+        #{payPwd}, #{address}, #{email})
     </insert>
+
+    <select id="searchId" parameterType="com.seoul.zero.app.model.vo.Member" resultType="java.lang.String">
+        select id from member where name=#{name} and phone=#{phone}
+    </select>
+
+    <select id="searchPw" parameterType="com.seoul.zero.app.model.vo.Member" resultType="java.lang.String">
+        select pwd from member where id=#{id} and name=#{name} and phone=#{phone}
+    </select>
 </mapper>
