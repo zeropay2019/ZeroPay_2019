@@ -1,4 +1,4 @@
-package com.seoul.app.zeropay
+package com.seoul.app.zeropay_client
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.seoul.app.zeropay", appContext.packageName)
+        assertEquals("com.seoul.app.zeropay_client", appContext.packageName)
     }
 }
