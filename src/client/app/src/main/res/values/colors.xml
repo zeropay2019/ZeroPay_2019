@@ -5,5 +5,5 @@
     <color name="colorAccent">#574bae</color>
     <color name="textColorPrimary">#000000</color>
     <color name="toolbarIconColor">@color/textColorPrimary</color>
-    <color name="colorControlActivated">#1A1818</color>
+    <color name="colorControlActivated">#7E7E7E</color>
 </resources>

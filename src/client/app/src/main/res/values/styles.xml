@@ -65,6 +65,30 @@
         <item name="rippleColor">#D6D6D6</item>
     </style>
 
+    <style name="Widget.ZeroPay.Button.Transaction.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">#777777</item>
+        <item name="rippleColor">#D6D6D6</item>
+    </style>
+
+    <style name="Widget.ZeroPay.Button.Transaction.Complete.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">#364188</item>
+        <item name="rippleColor">#D6D6D6</item>
+    </style>
+
+    <style name="Widget.ZeroPay.Button.Transaction.Cancel.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">#BE1919</item>
+        <item name="rippleColor">#D6D6D6</item>
+    </style>
+
     <style name="Widget.ZeroPay.Button.Transaction" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">#777777</item>
         <item name="android:textSize">26sp</item>
