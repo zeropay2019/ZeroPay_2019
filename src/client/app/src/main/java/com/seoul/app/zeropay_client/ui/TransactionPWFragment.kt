@@ -2,7 +2,6 @@ package com.seoul.app.zeropay_client.ui
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,48 +11,56 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.seoul.app.zeropay_client.R
 import com.seoul.app.zeropay_client.databinding.FragmentTransactionPwBinding
-import com.seoul.app.zeropay_client.model.TransactionViewModel
+import com.seoul.app.zeropay_client.model.UserViewModel
 
 
 class TransactionPWFragment : Fragment() {
-    private val PASSWORD_LENGTH = 4
-    private val PASSWORD_KIND = 2
     private lateinit var binding: FragmentTransactionPwBinding
-    private lateinit var viewModel: TransactionViewModel
+    private lateinit var PWViewModel: UserViewModel
     lateinit var view: ViewGroup
     private lateinit var checkPasswordList: ArrayList<String>
+
+    companion object {
+        private const val PASSWORD_LENGTH = 4
+        private const val PASSWORD_KIND = 2
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //TODO:코드리팩토링해야됨
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_transaction_pw, container, false)
-        viewModel = ViewModelProviders.of(requireActivity()).get(TransactionViewModel::class.java)
+        PWViewModel = ViewModelProviders.of(requireActivity()).get(UserViewModel::class.java)
         binding.lifecycleOwner = this
         binding.fragment = this
         view = binding.root as ViewGroup
-        binding.tranViewModel = viewModel
+        binding.tranViewModel = PWViewModel
         checkPasswordList = ArrayList()
-        viewModel.initViewModels()
+        PWViewModel.initList()
         return binding.root
     }
 
     fun pressTransactionPW(buttonState: Boolean, number: String) {
-        Log.e("button pressed","success")
-        viewModel.buttonState.value = buttonState
-        viewModel.setPassword(number)
-        val imageView = view.findViewWithTag<ImageView>(viewModel.transactionPasswordLength.value.toString())
+        PWViewModel.buttonState.value = buttonState
+        PWViewModel.setPassword(number)
+        val imageView =
+            view.findViewWithTag<ImageView>(PWViewModel.transactionPasswordLength.value.toString())
         imageView.setImageResource(R.drawable.dot1_24dp)
+        if (PWViewModel.transactionPasswordLength.value == PASSWORD_LENGTH) {
+            resetPassword()
+        }
     }
 
     fun deletePressed(buttonState: Boolean) {
-        Log.e("delete pressed","success")
-        viewModel.buttonState.value = buttonState
-        viewModel.deletePassword()
+        PWViewModel.buttonState.value = buttonState
+        PWViewModel.deletePassword()
         val imageView =
-            view.findViewWithTag<ImageView>(viewModel.transactionPasswordLength.value?.plus(
-                1
-            ).toString())
+            view.findViewWithTag<ImageView>(
+                PWViewModel.transactionPasswordLength.value?.plus(
+                    1
+                ).toString()
+            )
         imageView.setImageResource(R.drawable.dot2_24dp)
     }
 
@@ -70,19 +77,20 @@ class TransactionPWFragment : Fragment() {
         return false
     }
 
-    fun resetPassword() {
-        Log.e("reset method","success")
-        binding.transactionTitle.text = "재배열?"
+    private fun resetPassword() {
+        binding.transactionTitle.text = "비밀번호 확인"
         for (i in 1..PASSWORD_LENGTH) {
             val imageView = view.findViewWithTag<ImageView>(i.toString())
             imageView.setImageResource(R.drawable.dot2_24dp)
         }
-        viewModel.transactionPassword.value?.let { checkPasswordList.add(it) }
+        //checkPasswordList.add(viewModel.transactionPassword.getValue());
+
+        PWViewModel.transactionPassword.value?.let { checkPasswordList.add(it) }
         if (checkPassword(checkPasswordList)) {
+            PWViewModel.payPwd.value = PWViewModel.transactionPassword.value
             fragmentManager!!.beginTransaction().remove(this@TransactionPWFragment).commit()
             fragmentManager!!.popBackStack()
         }
-        viewModel.initViewModels()
+        PWViewModel.initViewModels()
     }
-
 }

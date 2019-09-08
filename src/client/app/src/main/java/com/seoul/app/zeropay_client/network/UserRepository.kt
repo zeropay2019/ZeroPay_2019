@@ -3,8 +3,8 @@ package com.seoul.app.zeropay_client.network
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object UserNetwork {
-    private const val BASE_URL = "localhost:8080/mem/"
+object UserRepository {
+    private const val BASE_URL = "http://192.168.0.127:8090/mem/"
 
     private lateinit var userApiImpl: UserApi
 

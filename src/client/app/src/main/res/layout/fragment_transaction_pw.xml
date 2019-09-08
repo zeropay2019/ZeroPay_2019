@@ -5,7 +5,7 @@
 
         <variable
             name="tranViewModel"
-            type="com.seoul.app.zeropay_client.model.TransactionViewModel" />
+            type="com.seoul.app.zeropay_client.model.UserViewModel" />
 
         <variable
             name="fragment"
@@ -210,7 +210,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="@{() -> fragment.resetPassword()}"
+                    android:onClick="@{() -> tranViewModel.shuffleList()}"
                     android:text="@string/reset_transaction_pw" />
 
                 <com.google.android.material.button.MaterialButton
