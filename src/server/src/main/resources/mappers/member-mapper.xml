@@ -30,4 +30,8 @@
     <select id="searchCard" parameterType="com.seoul.zero.app.model.vo.response.Card" resultType="com.seoul.zero.app.model.vo.response.Card">
         select * from card where mno=#{mno}
     </select>
+
+    <delete id="deleteCard" parameterType="com.seoul.zero.app.model.vo.response.Card">
+        delete from card where mno=#{mno} and cardNumber=#{cardNumber}
+    </delete>
 </mapper>

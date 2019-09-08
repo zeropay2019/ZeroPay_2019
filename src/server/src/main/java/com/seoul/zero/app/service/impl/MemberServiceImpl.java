@@ -120,4 +120,15 @@ public class MemberServiceImpl implements MemberService {
         }
         return wrapper;
     }
+
+    @Override
+    public ResponseWrapper deleteCard(Card param) {
+        ResponseWrapper wrapper = createWrapper();
+        int result = memberMapper.deleteCard(param);
+        if(result==0){
+            wrapper.setMessage("카드 삭제에 실패했습니다.");
+            wrapper.setResultCode(108);
+        }
+        return wrapper;
+    }
 }

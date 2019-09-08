@@ -85,4 +85,12 @@ public class MemberController {
         ResponseWrapper response = memberService.searchCard(param);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    // 카드 삭제
+    @RequestMapping(value="/deleteCard", method = RequestMethod.POST)
+    public ResponseEntity<ResponseWrapper> deleteCard(@RequestBody Card param){
+        logger.info("카드삭제 요청............");
+        ResponseWrapper response = memberService.deleteCard(param);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

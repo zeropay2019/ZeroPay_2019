@@ -31,5 +31,8 @@ public interface MemberMapper {
     int enrollCard(EnrollCard param);
 
     // 카드 리스트
-    List<Card> searchCard(Card card);
+    List<Card> searchCard(Card param);
+
+    // 카드 삭제
+    int deleteCard(Card param);
 }
