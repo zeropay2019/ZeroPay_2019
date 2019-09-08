@@ -1,13 +1,12 @@
-package com.seoul.zero.app.model.vo;
+package com.seoul.zero.app.model.vo.request;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-public class Card {
+public class EnrollCard {
+    private int mno;
     private String cardNumber;
     private String nick;
     private  String company;

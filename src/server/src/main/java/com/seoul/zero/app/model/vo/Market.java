@@ -11,6 +11,6 @@ public class Market {
     private String marketName;
     private String address;
     private String category;
-    private int lat;
-    private int lon;
+    private double lat;
+    private double lon;
 }
