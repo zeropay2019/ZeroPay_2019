@@ -93,7 +93,6 @@
 - method : POST
 - parameter : mno, cardNumber, nick, company
 - return :
-
 <성공시>
 {
     "resultCode": 0,
@@ -108,12 +107,13 @@
     "param": null
 }
 
+<br />
+
 ## 6. 사용자 카드 목록
 - 요청 URL : /mem/cardList
 - method : POST
 - parameter : mno
 - return :
-
 <성공시>
 {
     "resultCode": 0,
@@ -133,3 +133,25 @@
         }
     ]
 }
+
+<br />
+
+## 7. 사용자 정보 출력
+- 요청 URL : /mem/memberInfo
+- method : POST
+- parameter : mno
+
+<br />
+
+## 8. 카드 삭제
+- URL : /mem/deleteCard
+- method : POST
+- parameter : mno, cardNUmber
+
+<br />
+
+## 9. 가맹점 리스트
+- URL : /mar/list
+- method : GET
+- parameter : lat(위도), lon(경도)
+- // 600m 이내에 있는 것 출력
