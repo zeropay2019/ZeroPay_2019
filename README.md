@@ -93,6 +93,7 @@
 - method : POST
 - parameter : mno, cardNumber, nick, company
 - return :
+
 <성공시>
 {
     "resultCode": 0,
@@ -112,6 +113,7 @@
 - method : POST
 - parameter : mno
 - return :
+
 <성공시>
 {
     "resultCode": 0,
