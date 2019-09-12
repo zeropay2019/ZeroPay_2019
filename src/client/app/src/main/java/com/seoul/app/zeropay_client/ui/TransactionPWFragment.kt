@@ -83,7 +83,6 @@ class TransactionPWFragment : Fragment() {
             val imageView = view.findViewWithTag<ImageView>(i.toString())
             imageView.setImageResource(R.drawable.dot2_24dp)
         }
-        //checkPasswordList.add(viewModel.transactionPassword.getValue());
 
         PWViewModel.transactionPassword.value?.let { checkPasswordList.add(it) }
         if (checkPassword(checkPasswordList)) {

@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,7 +44,6 @@ class HomeFragment : Fragment() {
             intentIntegrator.captureActivity = AnyOrientationCaptureActivity::class.java
             intentIntegrator.initiateScan()
         }
-
     }
 
 }

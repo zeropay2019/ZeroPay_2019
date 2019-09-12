@@ -1,10 +1,12 @@
 package com.seoul.app.zeropay_client.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.seoul.app.zeropay_client.R
+import kotlinx.android.synthetic.main.add_card_layout.view.*
 
 class CardViewpagerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -38,7 +40,9 @@ class CardViewpagerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType){
             ADD_CARD_VIEW_TYPE -> {
-
+                holder.itemView.add_card_button.setOnClickListener {
+                    Log.e("add card button press","success")
+                }
             }
 
             USER_CARD_VIEW_TYPE -> {
