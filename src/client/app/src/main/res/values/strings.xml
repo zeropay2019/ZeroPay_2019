@@ -22,4 +22,7 @@
     <string name="set_transaction_password">거래 비밀번호 설정</string>
     <string name="register_complete">가입완료</string>
     <string name="register_cancel">취소</string>
+    <string name="check_transaction_pw">비밀번호 입력</string>
+    <string name="reset_transaction_pw">재배열</string>
+    <string name="delete_password">지움</string>
 </resources>
