@@ -62,4 +62,12 @@ dependencies {
     implementation 'org.jetbrains.anko:anko:0.10.8'
     //preference
     implementation 'androidx.preference:preference:1.1.0-rc01'
+    //viewpager2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0-beta04'
+    //qr_code
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    //carouselview
+    implementation 'com.synnapps:carouselview:0.1.5'
+    //expandable view
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 }
