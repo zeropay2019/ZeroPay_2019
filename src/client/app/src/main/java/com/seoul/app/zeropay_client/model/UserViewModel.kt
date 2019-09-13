@@ -10,17 +10,19 @@ class UserViewModel : ViewModel() {
     var transactionPasswordLength = MutableLiveData<Int>()
     var payPwd = MutableLiveData<String>()
     var buttonState = MutableLiveData<Boolean>()
+    private val list = ArrayList<String>()
 
     companion object {
         private const val PASSWORD_LENGTH = 4
     }
 
-    private val list = ArrayList<String>()
-
-    fun initList() {
+    init {
         transactionNumList.value = list
         transactionPassword.value = ""
         transactionPasswordLength.value = 0
+    }
+
+    fun initList() {
         for (i in 0..9) {
             list.add(i.toString())
         }

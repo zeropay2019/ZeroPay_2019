@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.seoul.app.zeropay_client.model.UserViewModel
 import com.seoul.app.zeropay_client.network.UserApi
 import com.seoul.app.zeropay_client.network.UserRepository
-import com.seoul.app.zeropay_client.network.request.RegisterRequest
+import com.seoul.app.zeropay_client.network.request.RegisterUserRequest
 import com.seoul.app.zeropay_client.network.response.ServerResponse
 import com.seoul.app.zeropay_client.ui.TransactionPWFragment
 import kotlinx.android.synthetic.main.activity_register.*
@@ -21,7 +21,7 @@ import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var requestRegister: RegisterRequest
+    private lateinit var requestRegisterUser: RegisterUserRequest
     private lateinit var userRequest: UserApi
     private lateinit var viewModel: UserViewModel
 
@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
 
         register_complete_button.setOnClickListener {
 
-            requestRegister = RegisterRequest(
+            requestRegisterUser = RegisterUserRequest(
                 id = id_edit_text.text.toString(),
                 name = name_edit_text.text.toString(),
                 pwd = password_edit_text.text.toString(),
@@ -55,7 +55,7 @@ class RegisterActivity : AppCompatActivity() {
                 email = email_edit_text.text.toString()
             )
 
-            userRequest.requestRegist(requestRegister).enqueue(object : Callback<ServerResponse> {
+            userRequest.requestRegistration(requestRegisterUser).enqueue(object : Callback<ServerResponse> {
                 override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
                     Log.e("register server fail", "" + t.toString())
                 }

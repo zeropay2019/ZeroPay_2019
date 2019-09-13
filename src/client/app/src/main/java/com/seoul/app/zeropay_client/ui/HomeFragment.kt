@@ -27,18 +27,27 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val imageResources =
             arrayOf(R.drawable.banner1, R.drawable.banner2, R.drawable.banner3, R.drawable.banner4)
-        val adapter = CardViewpagerAdapter()
-        add_card_viewpager.adapter = adapter
 
-        val transactionAdapter = TransactionAdapter()
-        transaction_recyclerView.adapter = transactionAdapter
+        add_card_viewpager.apply {
+            adapter = CardViewpagerAdapter(){
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .add(R.id.container_frame, EnrollCardFragment())
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
+        transaction_recyclerView.apply {
+            adapter = TransactionAdapter()
+        }
 
+        //setting carouselView
         carouselView.setImageListener { position, imageView ->
             imageView.scaleType = ImageView.ScaleType.FIT_XY
             imageView.setImageResource(imageResources[position])
         }
         carouselView.pageCount = imageResources.size
 
+        //qr code scanner
         qr_button.setOnClickListener {
             val intentIntegrator = IntentIntegrator(requireActivity())
             intentIntegrator.captureActivity = AnyOrientationCaptureActivity::class.java

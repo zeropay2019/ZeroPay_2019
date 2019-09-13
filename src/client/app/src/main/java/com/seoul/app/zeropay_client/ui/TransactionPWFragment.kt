@@ -16,7 +16,7 @@ import com.seoul.app.zeropay_client.model.UserViewModel
 
 class TransactionPWFragment : Fragment() {
     private lateinit var binding: FragmentTransactionPwBinding
-    private lateinit var PWViewModel: UserViewModel
+    private lateinit var userPasswordViewModel: UserViewModel
     lateinit var view: ViewGroup
     private lateinit var checkPasswordList: ArrayList<String>
 
@@ -29,35 +29,34 @@ class TransactionPWFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //TODO:코드리팩토링해야됨
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_transaction_pw, container, false)
-        PWViewModel = ViewModelProviders.of(requireActivity()).get(UserViewModel::class.java)
+        userPasswordViewModel = ViewModelProviders.of(requireActivity()).get(UserViewModel::class.java)
         binding.lifecycleOwner = this
         binding.fragment = this
         view = binding.root as ViewGroup
-        binding.tranViewModel = PWViewModel
+        binding.tranViewModel = userPasswordViewModel
         checkPasswordList = ArrayList()
-        PWViewModel.initList()
+        userPasswordViewModel.initList()
         return binding.root
     }
 
     fun pressTransactionPW(buttonState: Boolean, number: String) {
-        PWViewModel.buttonState.value = buttonState
-        PWViewModel.setPassword(number)
+        userPasswordViewModel.buttonState.value = buttonState
+        userPasswordViewModel.setPassword(number)
         val imageView =
-            view.findViewWithTag<ImageView>(PWViewModel.transactionPasswordLength.value.toString())
+            view.findViewWithTag<ImageView>(userPasswordViewModel.transactionPasswordLength.value.toString())
         imageView.setImageResource(R.drawable.dot1_24dp)
-        if (PWViewModel.transactionPasswordLength.value == PASSWORD_LENGTH) {
+        if (userPasswordViewModel.transactionPasswordLength.value == PASSWORD_LENGTH) {
             resetPassword()
         }
     }
 
     fun deletePressed(buttonState: Boolean) {
-        PWViewModel.buttonState.value = buttonState
-        PWViewModel.deletePassword()
+        userPasswordViewModel.buttonState.value = buttonState
+        userPasswordViewModel.deletePassword()
         val imageView =
             view.findViewWithTag<ImageView>(
-                PWViewModel.transactionPasswordLength.value?.plus(
+                userPasswordViewModel.transactionPasswordLength.value?.plus(
                     1
                 ).toString()
             )
@@ -84,12 +83,12 @@ class TransactionPWFragment : Fragment() {
             imageView.setImageResource(R.drawable.dot2_24dp)
         }
 
-        PWViewModel.transactionPassword.value?.let { checkPasswordList.add(it) }
+        userPasswordViewModel.transactionPassword.value?.let { checkPasswordList.add(it) }
         if (checkPassword(checkPasswordList)) {
-            PWViewModel.payPwd.value = PWViewModel.transactionPassword.value
+            userPasswordViewModel.payPwd.value = userPasswordViewModel.transactionPassword.value
             fragmentManager!!.beginTransaction().remove(this@TransactionPWFragment).commit()
             fragmentManager!!.popBackStack()
         }
-        PWViewModel.initViewModels()
+        userPasswordViewModel.initViewModels()
     }
 }
