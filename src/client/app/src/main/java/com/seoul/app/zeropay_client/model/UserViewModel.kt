@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.seoul.app.zeropay_client.network.UserApi
 import com.seoul.app.zeropay_client.network.UserRepository
 import com.seoul.app.zeropay_client.network.request.EnrollCardRequest
+import com.seoul.app.zeropay_client.network.request.GetCardRequest
 import com.seoul.app.zeropay_client.network.response.ServerResponse
+import com.seoul.app.zeropay_client.network.response.UserCardResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +22,7 @@ class UserViewModel : ViewModel() {
     var buttonState = MutableLiveData<Boolean>()
     private val list = ArrayList<String>()
     private var userNetWork: UserApi
+    lateinit var userCardList: MutableLiveData<List<UserCardResponse>>
 
     companion object {
         private const val PASSWORD_LENGTH = 4
@@ -69,19 +72,40 @@ class UserViewModel : ViewModel() {
     }
 
     //사용자 카드등록
-    fun registerUserCard(enrollCardRequest: EnrollCardRequest){
-        userNetWork.enrollCard(enrollCardRequest).enqueue(object : Callback<ServerResponse> {
-            override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
-                Log.e("Register User Card Fail ",""+t.toString())
+    fun registerUserCard(enrollCardRequest: EnrollCardRequest) {
+        userNetWork.enrollCard(enrollCardRequest).enqueue(object : Callback<ServerResponse<Any>> {
+            override fun onFailure(call: Call<ServerResponse<Any>>, t: Throwable) {
+                Log.e("Register User Card Fail ", "" + t.toString())
             }
 
             override fun onResponse(
-                call: Call<ServerResponse>,
-                response: Response<ServerResponse>
+                call: Call<ServerResponse<Any>>,
+                response: Response<ServerResponse<Any>>
             ) {
 
             }
         })
+    }
+
+    fun getUserCardList(getCardRequest: GetCardRequest) {
+        userNetWork.getCard(getCardRequest)
+            .enqueue(object : Callback<ServerResponse<List<UserCardResponse>>> {
+                override fun onFailure(
+                    call: Call<ServerResponse<List<UserCardResponse>>>,
+                    t: Throwable
+                ) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+                override fun onResponse(
+                    call: Call<ServerResponse<List<UserCardResponse>>>,
+                    response: Response<ServerResponse<List<UserCardResponse>>>
+                ) {
+                    if (response.isSuccessful){
+                        if (response.body() != null) userCardList.value = response.body()!!.param
+                    }
+                }
+            })
     }
 
 }

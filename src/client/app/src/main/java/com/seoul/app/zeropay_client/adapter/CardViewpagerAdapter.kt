@@ -5,13 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.seoul.app.zeropay_client.R
+import com.seoul.app.zeropay_client.network.response.UserCardResponse
 import kotlinx.android.synthetic.main.add_card_layout.view.*
+import kotlinx.android.synthetic.main.register_viewpager_item.view.*
 
-class CardViewpagerAdapter(private val clickListener: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CardViewpagerAdapter(private val clickListener: () -> Unit, private var cardInfoList: List<UserCardResponse>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val ADD_CARD_VIEW_TYPE = 1
         const val USER_CARD_VIEW_TYPE = 2
+    }
+
+    init {
+        cardInfoList = ArrayList()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -48,7 +54,9 @@ class CardViewpagerAdapter(private val clickListener: () -> Unit) : RecyclerView
             }
 
             USER_CARD_VIEW_TYPE -> {
-
+                val responseTest = UserCardResponse(0, "1111222233334444","Test","Test 영화")
+                holder.itemView.bank_name_textView.text = responseTest.company
+                holder.itemView.card_paymentMethodNum_textView.text = responseTest.cardNumber
             }
         }
     }

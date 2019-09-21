@@ -55,14 +55,14 @@ class RegisterActivity : AppCompatActivity() {
                 email = email_edit_text.text.toString()
             )
 
-            userRequest.requestRegistration(requestRegisterUser).enqueue(object : Callback<ServerResponse> {
-                override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
+            userRequest.requestRegistration(requestRegisterUser).enqueue(object : Callback<ServerResponse<Any>> {
+                override fun onFailure(call: Call<ServerResponse<Any>>, t: Throwable) {
                     Log.e("register server fail", "" + t.toString())
                 }
 
                 override fun onResponse(
-                    call: Call<ServerResponse>,
-                    response: Response<ServerResponse>
+                    call: Call<ServerResponse<Any>>,
+                    response: Response<ServerResponse<Any>>
                 ) {
                     if (response.isSuccessful) {
                         if (response.body() != null) {
