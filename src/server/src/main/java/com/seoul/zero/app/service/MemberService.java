@@ -28,5 +28,8 @@ public interface MemberService {
     ResponseWrapper enrollCard(EnrollCard param);
 
     // 카드 리스트
-    ResponseWrapper searchCard(Card card);
+    ResponseWrapper searchCard(Card param);
+
+    // 카드 삭제
+    ResponseWrapper deleteCard(Card param);
 }
