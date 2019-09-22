@@ -241,3 +241,69 @@
 }
 
 <br />
+
+## 10. 공지사항 리스트
+- URL : /board/list
+- method : GET
+- parameter : none(없음)
+- return :
+
+<성공시>
+{
+    "resultCode": 0,
+    "message": "success",
+    "param": [
+        {
+            "bno": 1,
+            "title": "(중요) 제로페이 결제 스미싱 주의",
+            "content": null,
+            "readcount": 2,
+            "time": "2019-09-22 06:24:12.0"
+        },
+        {
+            "bno": 2,
+            "title": "제로페이모바일상품권 법인대량구매 안내",
+            "content": null,
+            "readcount": 0,
+            "time": "2019-09-22 06:25:53.0"
+        },
+        // 생략
+        ]
+}
+
+<실패시>
+{
+    "resultCode": 109,
+    "message": "공지사항을 가져오는데 실패 했습니다.",
+    "param": null
+}
+
+<br />
+
+## 11. 글 상세보기
+- URL : /board/detail
+- method : GET
+- parameter : bno(글번호)
+- return : 
+
+<성공시>
+{
+    "resultCode": 0,
+    "message": "success",
+    "param": {
+        "bno": 2,
+        "title": "제로페이모바일상품권 법인대량구매 안내",
+        "content": "제로페이모바일상품권 법인대량구매 안내드립니다. \n\n\n\n* 구매방법 : 대량구매 신청 → 구매대금 납부 → 대량구매법인 및 계정 등록 → 모바일 상품권 대량구매 → 대상자에게 LMS 대량발송 \n                   (자세한 내용은 첨부파일 참고) \n\n* 대량구매 신청방법 : 대량구매법인 및 계정 등록양식, 대량구매 등록양식 작성 후 담당자(khj_2216@zpay.or.kr)에게 메일 발송 \n\n* 대량발송대상자 등록양식은 관리자페이지에서 직접 업로드 \n\n* 문의 : 1670-0582, 1522-2270",
+        "readcount": 0,
+        "time": "2019-09-22 06:25:53.0"
+    }
+}
+
+
+<실패시>
+
+{
+    "resultCode": 110,
+    "message": "공지사항 글을 가져오는데 실패 했습니다.",
+    "param": null
+}
