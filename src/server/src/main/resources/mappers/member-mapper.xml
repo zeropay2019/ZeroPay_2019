@@ -7,7 +7,7 @@
     </select>
 
     <select id="memberInfo" parameterType="com.seoul.zero.app.model.vo.Member" resultType="com.seoul.zero.app.model.vo.Member">
-        select * from member where mno=#{mno}
+        select * from member where id=#{id}
     </select>
 
     <insert id="register" parameterType="com.seoul.zero.app.model.vo.Member">

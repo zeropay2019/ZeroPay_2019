@@ -27,10 +27,14 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public ResponseWrapper login(Member param) {
         ResponseWrapper wrapper = createWrapper();
+        Member member = null;
         int result = memberMapper.login(param);
         if (result == 0) {
             wrapper.setMessage("존재하지 않은 사용자입니다.");
             wrapper.setResultCode(100);
+        }else{
+            member = memberMapper.memberInfo(param);
+            wrapper.setParam(member);
         }
         return wrapper;
     }
