@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
-    lateinit var userCardList: List<UserCardResponse>
+    private lateinit var userCardList: ArrayList<UserCardResponse?>
     private lateinit var viewModel: UserViewModel
 
     override fun onCreateView(
@@ -28,22 +28,27 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         viewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
-        viewModel.getUserCardList()
+        viewModel.getUserCardList(0)
+        if (viewModel.userCardList.value != null) {
+            userCardList = viewModel.userCardList.value!!
+        }
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val imageResources =
             arrayOf(R.drawable.banner1, R.drawable.banner2, R.drawable.banner3, R.drawable.banner4)
+        viewModel = ViewModelProviders.of(requireActivity()).get(UserViewModel::class.java)
 
-        add_card_viewpager.apply {
-            adapter = CardViewpagerAdapter(){
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .add(R.id.container_frame, EnrollCardFragment())
-                    .addToBackStack(null)
-                    .commit()
-            }
+        val addCardAdapter = CardViewpagerAdapter {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .add(R.id.container_frame, EnrollCardFragment())
+                .addToBackStack(null)
+                .commit()
         }
+
+        add_card_viewpager.adapter = addCardAdapter
+
         transaction_recyclerView.apply {
             adapter = TransactionAdapter()
         }

@@ -6,13 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.seoul.app.zeropay_client.network.UserApi
 import com.seoul.app.zeropay_client.network.UserRepository
 import com.seoul.app.zeropay_client.network.request.EnrollCardRequest
-import com.seoul.app.zeropay_client.network.request.GetCardRequest
 import com.seoul.app.zeropay_client.network.response.ServerResponse
 import com.seoul.app.zeropay_client.network.response.UserCardResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 class UserViewModel : ViewModel() {
     var transactionNumList = MutableLiveData<ArrayList<String>>()
@@ -22,7 +20,7 @@ class UserViewModel : ViewModel() {
     var buttonState = MutableLiveData<Boolean>()
     private val list = ArrayList<String>()
     private var userNetWork: UserApi
-    lateinit var userCardList: MutableLiveData<List<UserCardResponse>>
+    var userCardList = MutableLiveData<ArrayList<UserCardResponse?>>()
 
     companion object {
         private const val PASSWORD_LENGTH = 4
@@ -33,6 +31,7 @@ class UserViewModel : ViewModel() {
         transactionPassword.value = ""
         transactionPasswordLength.value = 0
         userNetWork = UserRepository.getInstance()
+        userCardList.value = ArrayList()
     }
 
     fun initList() {
@@ -82,27 +81,28 @@ class UserViewModel : ViewModel() {
                 call: Call<ServerResponse<Any>>,
                 response: Response<ServerResponse<Any>>
             ) {
-
+                Log.e("Register user Card Success ",""+response.body().toString())
             }
         })
     }
 
-    fun getUserCardList(getCardRequest: GetCardRequest) {
-        userNetWork.getCard(getCardRequest)
-            .enqueue(object : Callback<ServerResponse<List<UserCardResponse>>> {
+    //사용자 카드목록 조회
+    fun getUserCardList(mno: Int) {
+        userNetWork.getCard(mno)
+            .enqueue(object : Callback<ServerResponse<ArrayList<UserCardResponse?>>> {
                 override fun onFailure(
-                    call: Call<ServerResponse<List<UserCardResponse>>>,
+                    call: Call<ServerResponse<ArrayList<UserCardResponse?>>>,
                     t: Throwable
                 ) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Log.e("Get User CardList Fail-> ",t.toString())
                 }
 
                 override fun onResponse(
-                    call: Call<ServerResponse<List<UserCardResponse>>>,
-                    response: Response<ServerResponse<List<UserCardResponse>>>
+                    call: Call<ServerResponse<ArrayList<UserCardResponse?>>>,
+                    response: Response<ServerResponse<ArrayList<UserCardResponse?>>>
                 ) {
                     if (response.isSuccessful){
-                        if (response.body() != null) userCardList.value = response.body()!!.param
+                        if (response.body() != null) userCardList.value = response.body()?.param
                     }
                 }
             })

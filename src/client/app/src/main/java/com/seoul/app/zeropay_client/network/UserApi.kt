@@ -25,7 +25,7 @@ interface UserApi {
     fun enrollCard(@Body enrollCardRequest: EnrollCardRequest): Call<ServerResponse<Any>>
     //카드목록가져오기
     @POST("cardList")
-    fun getCard(@Body getCardRequest: GetCardRequest): Call<ServerResponse<List<UserCardResponse>>>
+    fun getCard(@Body mno: Int): Call<ServerResponse<ArrayList<UserCardResponse?>>>
     //유저정보가져오기
     @POST("memberInfo")
     fun getUserInfo(@Body getCardRequest: GetCardRequest): Call<ServerResponse<UserInfoResponse>>
