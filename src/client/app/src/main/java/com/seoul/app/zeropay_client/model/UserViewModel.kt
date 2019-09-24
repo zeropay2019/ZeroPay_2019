@@ -87,8 +87,8 @@ class UserViewModel : ViewModel() {
     }
 
     //사용자 카드목록 조회
-    fun getUserCardList(mno: Int) {
-        userNetWork.getCard(mno)
+    fun getUserCardList(userMno: UserMno) {
+        userNetWork.getCard(userMno)
             .enqueue(object : Callback<ServerResponse<ArrayList<UserCardResponse?>>> {
                 override fun onFailure(
                     call: Call<ServerResponse<ArrayList<UserCardResponse?>>>,
@@ -103,6 +103,7 @@ class UserViewModel : ViewModel() {
                 ) {
                     if (response.isSuccessful){
                         if (response.body() != null) userCardList.value = response.body()?.param
+                        Log.e("Get User CardList Success-> ",""+response.body().toString())
                     }
                 }
             })

@@ -22,6 +22,7 @@ class EnrollCardFragment : Fragment() {
     private lateinit var userNetWork: UserApi
     private lateinit var enrollCardRequest: EnrollCardRequest
     private lateinit var viewModel: UserViewModel
+    private lateinit var stringBuilder: StringBuilder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,23 +55,33 @@ class EnrollCardFragment : Fragment() {
                 cardNum_edit_4.text.toString()
             )
 
-            if (validCardNum(numArray.joinToString())){
+            val inputCardNum = makeCardNumber(numArray)
+            if (validCardNum(inputCardNum)){
                 enrollCardRequest = EnrollCardRequest(
                     0,
-                    numArray.joinToString(""),
+                    inputCardNum,
                     card_nickName_edit_text.text.toString(),
                     bank_spinner.selectedItem.toString()
                 )
                 viewModel.registerUserCard(enrollCardRequest)
+                Toast.makeText(requireContext(), "카드가 성공적으로 등록되었습니다.", Toast.LENGTH_SHORT).show()
+                fragmentManager?.beginTransaction()?.remove(this)?.commit()
             }else{
                 Toast.makeText(requireContext(), "카드번호를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    //valid fun
     private fun validCardNum(targetNumber: String): Boolean{
         return targetNumber.length > 15
+    }
+
+    private fun makeCardNumber(numArr: Array<String>): String{
+        stringBuilder = StringBuilder()
+        for (i in numArr){
+            stringBuilder.append(i)
+        }
+        return stringBuilder.toString()
     }
 
 }

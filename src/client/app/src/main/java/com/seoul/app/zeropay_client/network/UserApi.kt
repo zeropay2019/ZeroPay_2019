@@ -1,5 +1,6 @@
 package com.seoul.app.zeropay_client.network
 
+import com.seoul.app.zeropay_client.model.UserMno
 import com.seoul.app.zeropay_client.network.request.*
 import com.seoul.app.zeropay_client.network.response.*
 import retrofit2.Call
@@ -10,7 +11,7 @@ import retrofit2.http.POST
 interface UserApi {
     //로그인
     @POST("login")
-    fun requestLogin(@Body loginRequest: LoginRequest): Call<ServerResponse<Any>>
+    fun requestLogin(@Body loginRequest: LoginRequest): Call<ServerResponse<LoginResponse>>
     //회원가입
     @POST("register")
     fun requestRegistration(@Body registerUserRequest: RegisterUserRequest): Call<ServerResponse<Any>>
@@ -25,7 +26,7 @@ interface UserApi {
     fun enrollCard(@Body enrollCardRequest: EnrollCardRequest): Call<ServerResponse<Any>>
     //카드목록가져오기
     @POST("cardList")
-    fun getCard(@Body mno: Int): Call<ServerResponse<ArrayList<UserCardResponse?>>>
+    fun getCard(@Body userMno: UserMno): Call<ServerResponse<ArrayList<UserCardResponse?>>>
     //유저정보가져오기
     @POST("memberInfo")
     fun getUserInfo(@Body getCardRequest: GetCardRequest): Call<ServerResponse<UserInfoResponse>>

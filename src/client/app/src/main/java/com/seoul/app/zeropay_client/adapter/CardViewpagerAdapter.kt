@@ -1,5 +1,6 @@
 package com.seoul.app.zeropay_client.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +10,7 @@ import com.seoul.app.zeropay_client.network.response.UserCardResponse
 import kotlinx.android.synthetic.main.add_card_layout.view.*
 import kotlinx.android.synthetic.main.register_viewpager_item.view.*
 
-class CardViewpagerAdapter(private val clickListener: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private var cardInfoList: ArrayList<UserCardResponse?> = ArrayList()
+class CardViewpagerAdapter(private val clickListener: (ArrayList<UserCardResponse?>) -> Unit, val context: Context, private var cardInfoList: ArrayList<UserCardResponse?>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val ADD_CARD_VIEW_TYPE = 1
@@ -25,7 +24,7 @@ class CardViewpagerAdapter(private val clickListener: () -> Unit) : RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ADD_CARD_VIEW_TYPE -> {
-                val view = LayoutInflater.from(parent.context)
+                val view = LayoutInflater.from(context)
                     .inflate(R.layout.add_card_layout, parent, false)
                 AddCardViewHolder(itemView = view)
             }
@@ -48,7 +47,7 @@ class CardViewpagerAdapter(private val clickListener: () -> Unit) : RecyclerView
         when (holder.itemViewType){
             ADD_CARD_VIEW_TYPE -> {
                 holder.itemView.add_card_button.setOnClickListener {
-                    clickListener.invoke()
+                    clickListener.invoke(cardInfoList)
                 }
             }
 
