@@ -73,4 +73,9 @@ class MainActivity : AppCompatActivity() , DecoratedBarcodeView.TorchListener {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
+
+    override fun onPause() {
+        super.onPause()
+
+    }
 }

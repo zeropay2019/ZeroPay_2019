@@ -35,5 +35,5 @@ interface UserApi {
     fun deleteCard(@Body deleteCardRequest: DeleteCardRequest): Call<ServerResponse<Any>>
     //가맹점위치가져오기
     @GET("list")
-    fun getShopList(@Body shopListRequest: ShopListRequest): Call<ServerResponse<ShopListResponse>>
+    fun getShopList(@Body shopListRequest: ShopListRequest): Call<ServerResponse<ArrayList<ShopListResponse>>>
 }

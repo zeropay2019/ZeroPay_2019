@@ -36,9 +36,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.getUserCardList(mno)
-        if (viewModel.userCardList.value != null) {
-            userCardList = viewModel.userCardList.value!!
-        }
+        //var mno: Int, var cardNumber: String, var nick: String, var company: String
+        userCardList = ArrayList()
+        userCardList.add(UserCardResponse(0, "1234567855554444","카드","신한"))
+        userCardList.add(UserCardResponse(0, "1234567855554444","카드","삼성"))
+        userCardList.add(UserCardResponse(0, "1234567855554444","카드","현대"))
+        userCardList.add(UserCardResponse(0, "1234567855554444","카드","카카오뱅크"))
+//        if (viewModel.userCardList.value != null) {
+//            userCardList = viewModel.userCardList.value!!
+//        }
 
         val imageResources =
             arrayOf(R.drawable.banner1, R.drawable.banner2, R.drawable.banner3, R.drawable.banner4)
@@ -49,7 +55,6 @@ class HomeFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }, requireContext(), userCardList)
-
 
         //사용자 카드리스트
         add_card_viewpager.adapter = addCardAdapter
