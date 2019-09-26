@@ -29,7 +29,7 @@ import com.seoul.app.zeropay_client.adapter.ShopListAdapter
 import com.seoul.app.zeropay_client.model.MapViewModel
 import com.seoul.app.zeropay_client.network.request.ShopListRequest
 import com.seoul.app.zeropay_client.network.response.ShopListResponse
-import kotlinx.android.synthetic.main.fragment_map.*
+import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -62,6 +62,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 super.onLocationResult(locationResult)
                 lastLocation = locationResult.lastLocation
                 placeMarkerOnMap(LatLng(lastLocation.latitude, lastLocation.longitude))
+                Log.e("locationCallback","called")
             }
         }
         return inflater.inflate(R.layout.fragment_map, container, false)
@@ -99,6 +100,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         val markerOptions = MarkerOptions().position(location)
         mMap.clear()
         mMap.addMarker(markerOptions)
+        Log.e("placeMarkeronMap","called")
+        addShopMarker(shopDummy)
     }
 
     private fun setUpMap() {
@@ -127,7 +130,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 requestLocation = ShopListRequest(currentLatLng.latitude, currentLatLng.longitude)
                 //가맹점 리스트 받기
 //                viewModel.getShopList(requestLocation)
-                addShopMarker(shopDummy)
             }
         }
     }
@@ -153,8 +155,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     private fun addShopMarker(shopList: ArrayList<ShopListResponse>){
+        Log.e("marker Custom!!!","called")
         for (item in shopList){
-            mMap.addMarker(MarkerOptions().title(item.marketName).position(LatLng(item.lat,item.lon)))
+            mMap.addMarker(MarkerOptions().position(LatLng(item.lat,item.lon)))
         }
     }
 
