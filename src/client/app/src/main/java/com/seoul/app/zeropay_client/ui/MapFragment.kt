@@ -100,7 +100,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         val markerOptions = MarkerOptions().position(location)
         mMap.clear()
         mMap.addMarker(markerOptions)
-        Log.e("placeMarkeronMap","called")
         addShopMarker(shopDummy)
     }
 

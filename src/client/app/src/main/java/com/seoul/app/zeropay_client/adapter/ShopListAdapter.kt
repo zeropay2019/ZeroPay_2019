@@ -1,9 +1,9 @@
 package com.seoul.app.zeropay_client.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.seoul.app.zeropay_client.R
 import com.seoul.app.zeropay_client.network.response.ShopListResponse
@@ -23,7 +23,7 @@ class ShopListAdapter(private val shopListResponse: ArrayList<ShopListResponse>)
     override fun onBindViewHolder(holder: ShopHolder, position: Int) {
         val item = shopListResponse[position]
         val listener = View.OnClickListener {
-            Log.e("onClick", item.address)
+            Toast.makeText(it.context, item.address, Toast.LENGTH_LONG).show()
         }
         holder.apply {
             bind(listener, item)
