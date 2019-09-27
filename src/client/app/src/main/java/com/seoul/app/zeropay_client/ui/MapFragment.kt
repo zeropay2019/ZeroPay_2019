@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -100,7 +102,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         val markerOptions = MarkerOptions().position(location)
         mMap.clear()
         mMap.addMarker(markerOptions)
+        markerOnCircle(location)
         addShopMarker(shopDummy)
+    }
+
+    private fun markerOnCircle(location: LatLng){
+        val circle = CircleOptions().center(location).radius(600.0).strokeWidth(1f).strokeColor(Color.parseColor("#3E0027FF")).fillColor(Color.parseColor("#190027FF"))
+        mMap.addCircle(circle)
     }
 
     private fun setUpMap() {
@@ -125,7 +133,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 Log.e("cur Lat Lng", "" + currentLatLng)
                 placeMarkerOnMap(currentLatLng)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13f))
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
                 requestLocation = ShopListRequest(currentLatLng.latitude, currentLatLng.longitude)
                 //가맹점 리스트 받기
 //                viewModel.getShopList(requestLocation)
