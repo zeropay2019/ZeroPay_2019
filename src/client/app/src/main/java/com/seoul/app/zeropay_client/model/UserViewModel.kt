@@ -102,8 +102,9 @@ class UserViewModel : ViewModel() {
                     response: Response<ServerResponse<ArrayList<UserCardResponse?>>>
                 ) {
                     if (response.isSuccessful){
-                        if (response.body() != null) userCardList.value = response.body()?.param
-                        Log.e("Get User CardList Success-> ",""+response.body().toString())
+                        if (response.body() != null)
+                            userCardList.value = response.body()?.param
+                        Log.e( "view Model userCardList-> ",""+userCardList.value)
                     }
                 }
             })

@@ -3,14 +3,19 @@ package com.seoul.app.zeropay_client.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.seoul.app.zeropay_client.R
 import com.seoul.app.zeropay_client.network.response.ShopListResponse
 import kotlinx.android.synthetic.main.shoplist_layout.view.*
 
-class ShopListAdapter(private val shopListResponse: ArrayList<ShopListResponse>): RecyclerView.Adapter<ShopListAdapter.ShopHolder>(){
+class ShopListAdapter(private val clickListener: (ShopListResponse) -> Unit): RecyclerView.Adapter<ShopListAdapter.ShopHolder>(){
+    private var shopListResponse: ArrayList<ShopListResponse> = ArrayList()
 
+    fun updateMap(shopListResponse: ArrayList<ShopListResponse>){
+        this.shopListResponse.clear()
+        this.shopListResponse.addAll(shopListResponse)
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int {
         return shopListResponse.size
     }
@@ -22,22 +27,18 @@ class ShopListAdapter(private val shopListResponse: ArrayList<ShopListResponse>)
 
     override fun onBindViewHolder(holder: ShopHolder, position: Int) {
         val item = shopListResponse[position]
-        val listener = View.OnClickListener {
-            Toast.makeText(it.context, item.address, Toast.LENGTH_LONG).show()
-        }
-        holder.apply {
-            bind(listener, item)
-            itemView.tag = item
+        holder.bind(item)
+        holder.itemView.shopList_container.setOnClickListener {
+            clickListener.invoke(shopListResponse[position])
         }
     }
 
     inner class ShopHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private var view: View = itemView
-        fun bind(listener: View.OnClickListener, item: ShopListResponse) {
+        fun bind(item: ShopListResponse) {
             view.shopAddress.text = item.address
             view.shopCategory.text = item.category
             view.shopName.text = item.marketName
-            view.setOnClickListener(listener)
         }
     }
 }

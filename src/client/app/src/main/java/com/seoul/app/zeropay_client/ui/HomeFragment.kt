@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.viewpager2.widget.ViewPager2
 import com.google.zxing.integration.android.IntentIntegrator
 import com.seoul.app.zeropay_client.AnyOrientationCaptureActivity
 import com.seoul.app.zeropay_client.R
@@ -23,7 +25,8 @@ class HomeFragment : Fragment() {
     //TODO:mno - Room
     private lateinit var userCardList: ArrayList<UserCardResponse?>
     private lateinit var viewModel: UserViewModel
-    private var mno = UserMno(3)
+    private lateinit var addCardAdapter : CardViewpagerAdapter
+    private var mno = UserMno(10)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,33 +34,46 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         viewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
+        userCardList = ArrayList()
+        viewModel.getUserCardList(mno)
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.getUserCardList(mno)
-        //var mno: Int, var cardNumber: String, var nick: String, var company: String
-        userCardList = ArrayList()
-        userCardList.add(UserCardResponse(0, "1234567855554444","카드","신한"))
-        userCardList.add(UserCardResponse(0, "1234567855554444","카드","삼성"))
-        userCardList.add(UserCardResponse(0, "1234567855554444","카드","현대"))
-        userCardList.add(UserCardResponse(0, "1234567855554444","카드","카카오뱅크"))
-//        if (viewModel.userCardList.value != null) {
-//            userCardList = viewModel.userCardList.value!!
-//        }
-
         val imageResources =
             arrayOf(R.drawable.banner1, R.drawable.banner2, R.drawable.banner3, R.drawable.banner4)
 
-        val addCardAdapter = CardViewpagerAdapter(  {
+        viewModel.userCardList.observe(this, Observer {
+                addCardAdapter.updateCard(it)
+                card_total_position.text = (it.size).toString()
+        })
+        addCardAdapter = CardViewpagerAdapter(  {
             requireActivity().supportFragmentManager.beginTransaction()
                 .add(R.id.container_frame, EnrollCardFragment())
                 .addToBackStack(null)
                 .commit()
         }, requireContext(), userCardList)
-
         //사용자 카드리스트
         add_card_viewpager.adapter = addCardAdapter
+        add_card_viewpager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                if (position == addCardAdapter.itemCount ){
+                    card_current_position.visibility = View.INVISIBLE
+                    card_total_position.visibility = View.INVISIBLE
+                    card_position_check.visibility = View.INVISIBLE
+                }else{
+                    card_current_position.visibility = View.VISIBLE
+                    card_total_position.visibility = View.VISIBLE
+                    card_position_check.visibility = View.VISIBLE
+                    card_current_position.text = (position).toString()
+                }
+            }
+        })
 
         //나의 거래
         transaction_recyclerView.apply {
@@ -78,5 +94,4 @@ class HomeFragment : Fragment() {
             intentIntegrator.initiateScan()
         }
     }
-
 }

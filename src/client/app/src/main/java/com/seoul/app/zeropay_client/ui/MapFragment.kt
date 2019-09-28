@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.gms.common.api.ResolvableApiException
@@ -45,12 +46,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     private lateinit var locationRequest: LocationRequest
     private lateinit var requestLocation: ShopListRequest
     private var locationUpdateState = false
+    private lateinit var shopListAdapter : ShopListAdapter
 
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var lastLocation: Location
-
-    val shopDummy = ArrayList<ShopListResponse>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +63,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
                 lastLocation = locationResult.lastLocation
-                placeMarkerOnMap(LatLng(lastLocation.latitude, lastLocation.longitude))
                 Log.e("locationCallback","called")
             }
         }
@@ -73,10 +72,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProviders.of(this)[MapViewModel::class.java]
 
-        for (i in 0..10){
-            shopDummy.add(ShopListResponse("DummyShop$i","서울시 성북구 $i","음식점$i",37.3+i,127.1+i))
+        shopListAdapter = ShopListAdapter {
+            val clickedShopPosition = LatLng(it.lat, it.lon)
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(clickedShopPosition))
         }
-        val shopListAdapter = ShopListAdapter(shopDummy)
         map_recyclerView.adapter = shopListAdapter
         map_recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
@@ -84,10 +83,20 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         createLocationRequest()
+
+        viewModel.responseShopList.observe(this, Observer {
+            if (it.isNotEmpty()){
+                shopListAdapter.updateMap(it)
+                addShopMarker(it)
+            }
+        })
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onMarkerClick(p0: Marker?) = false
+    override fun onMarkerClick(clickedMarker: Marker?): Boolean{
+        clickedMarker?.showInfoWindow()
+        return true
+    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -99,11 +108,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     private fun placeMarkerOnMap(location: LatLng) {
-        val markerOptions = MarkerOptions().position(location)
-        mMap.clear()
-        mMap.addMarker(markerOptions)
         markerOnCircle(location)
-        addShopMarker(shopDummy)
     }
 
     private fun markerOnCircle(location: LatLng){
@@ -133,10 +138,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 Log.e("cur Lat Lng", "" + currentLatLng)
                 placeMarkerOnMap(currentLatLng)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 17f))
+
                 requestLocation = ShopListRequest(currentLatLng.latitude, currentLatLng.longitude)
                 //가맹점 리스트 받기
-//                viewModel.getShopList(requestLocation)
+                viewModel.getShopList(requestLocation)
             }
         }
     }
@@ -162,9 +168,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     private fun addShopMarker(shopList: ArrayList<ShopListResponse>){
-        Log.e("marker Custom!!!","called")
         for (item in shopList){
-            mMap.addMarker(MarkerOptions().position(LatLng(item.lat,item.lon)))
+            mMap.addMarker(MarkerOptions().title(item.marketName).position(LatLng(item.lat,item.lon)))
         }
     }
 

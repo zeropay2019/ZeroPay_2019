@@ -5,16 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.seoul.app.zeropay_client.R
 import com.seoul.app.zeropay_client.model.UserViewModel
 import com.seoul.app.zeropay_client.network.UserApi
 import com.seoul.app.zeropay_client.network.UserRepository
 import com.seoul.app.zeropay_client.network.request.EnrollCardRequest
 import kotlinx.android.synthetic.main.fragment_enroll_card.*
+
+
 
 
 class EnrollCardFragment : Fragment() {
@@ -30,14 +32,15 @@ class EnrollCardFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         userNetWork = UserRepository.getInstance()
-        return inflater.inflate(R.layout.fragment_enroll_card, container, false)
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        return inflater.inflate(com.seoul.app.zeropay_client.R.layout.fragment_enroll_card, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
-        val bankArray = resources.getStringArray(R.array.bank)
+        val bankArray = resources.getStringArray(com.seoul.app.zeropay_client.R.array.bank)
         val spinnerAdapter = ArrayAdapter(
             requireActivity(),
             android.R.layout.simple_spinner_dropdown_item,
@@ -58,7 +61,7 @@ class EnrollCardFragment : Fragment() {
             val inputCardNum = makeCardNumber(numArray)
             if (validCardNum(inputCardNum)){
                 enrollCardRequest = EnrollCardRequest(
-                    0,
+                    10,
                     inputCardNum,
                     card_nickName_edit_text.text.toString(),
                     bank_spinner.selectedItem.toString()

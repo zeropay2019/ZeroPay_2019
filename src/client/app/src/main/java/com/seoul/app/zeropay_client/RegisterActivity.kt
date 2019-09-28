@@ -67,6 +67,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         if (response.body() != null) {
                             Log.e("register server Response -> ", "" + response.body())
+                            finish()
                         }
                     }
                 }

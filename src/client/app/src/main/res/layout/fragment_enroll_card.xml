@@ -179,8 +179,9 @@
             android:id="@+id/card_registration_button"
             style="@style/Widget.ZeroPay.Button2"
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="60dp"
-            android:layout_gravity="bottom"
+            android:layout_gravity="top"
             android:text="등록하기" />
 
     </LinearLayout>
