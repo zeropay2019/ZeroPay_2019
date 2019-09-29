@@ -1,6 +1,7 @@
 package com.seoul.app.zeropay_client.ui
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,11 +23,9 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
-    //TODO:mno - Room
     private lateinit var userCardList: ArrayList<UserCardResponse?>
     private lateinit var viewModel: UserViewModel
     private lateinit var addCardAdapter : CardViewpagerAdapter
-    private var mno = UserMno(10)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +34,11 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         viewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
         userCardList = ArrayList()
-        viewModel.getUserCardList(mno)
+
+        val prefs = requireContext().getSharedPreferences("UserMno", Context.MODE_PRIVATE)
+        val getMno = prefs.getInt("UserMno", 0)
+        viewModel.getUserCardList(UserMno(getMno))
+
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -47,12 +50,14 @@ class HomeFragment : Fragment() {
                 addCardAdapter.updateCard(it)
                 card_total_position.text = (it.size).toString()
         })
+
         addCardAdapter = CardViewpagerAdapter(  {
             requireActivity().supportFragmentManager.beginTransaction()
-                .add(R.id.container_frame, EnrollCardFragment())
+                .replace(R.id.container_frame, EnrollCardFragment())
                 .addToBackStack(null)
                 .commit()
         }, requireContext(), userCardList)
+
         //사용자 카드리스트
         add_card_viewpager.adapter = addCardAdapter
         add_card_viewpager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){

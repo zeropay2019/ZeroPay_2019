@@ -21,6 +21,7 @@ class UserViewModel : ViewModel() {
     private val list = ArrayList<String>()
     private var userNetWork: UserApi
     var userCardList = MutableLiveData<ArrayList<UserCardResponse?>>()
+    var userMno = MutableLiveData<Int>()
 
     companion object {
         private const val PASSWORD_LENGTH = 4

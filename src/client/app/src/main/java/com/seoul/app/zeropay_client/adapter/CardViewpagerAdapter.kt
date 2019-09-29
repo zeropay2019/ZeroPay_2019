@@ -108,46 +108,46 @@ class CardViewpagerAdapter(
         when (cardName) {
             "신한" -> {
                 (holder as CardViewHolder).itemView.card_brand_ImageView.setImageResource(R.drawable.shinhan)
-                holder.itemView.card_main.setBackgroundResource(R.color.ShinHan_card)
+                holder.itemView.card_form_Layout.setBackgroundResource(R.color.ShinHan_card)
             }
             "삼성" -> {
                 (holder as CardViewHolder).itemView.card_brand_ImageView.setImageResource(R.drawable.samsung)
-                holder.itemView.card_main.setBackgroundResource(R.color.SamSung_card)
+                holder.itemView.card_form_Layout.setBackgroundResource(R.color.SamSung_card)
             }
             "현대" -> {
                 (holder as CardViewHolder).itemView.card_brand_ImageView.setImageResource(R.drawable.hyundai)
-                holder.itemView.card_main.setBackgroundResource(R.color.HyunDai_card)
+                holder.itemView.card_form_Layout.setBackgroundResource(R.color.HyunDai_card)
             }
             "BC" -> {
                 (holder as CardViewHolder).itemView.card_brand_ImageView.setImageResource(R.drawable.bc)
-                holder.itemView.card_main.setBackgroundResource(R.color.BC_card)
+                holder.itemView.card_form_Layout.setBackgroundResource(R.color.BC_card)
             }
             "KB국민" -> {
                 (holder as CardViewHolder).itemView.card_brand_ImageView.setImageResource(R.drawable.kb)
-                holder.itemView.card_main.setBackgroundResource(R.color.KB_card)
+                holder.itemView.card_form_Layout.setBackgroundResource(R.color.KB_card)
                 holder.itemView.card_paymentMethodNum_textView.setTextColor(Color.BLACK)
                 holder.itemView.card_pay_type.setTextColor(Color.BLACK)
             }
             "하나" -> {
                 (holder as CardViewHolder).itemView.card_brand_ImageView.setImageResource(R.drawable.hana)
-                holder.itemView.card_main.setBackgroundResource(R.color.Hana_card)
+                holder.itemView.card_form_Layout.setBackgroundResource(R.color.Hana_card)
             }
             "롯데" -> {
                 (holder as CardViewHolder).itemView.card_brand_ImageView.setImageResource(R.drawable.lotte)
-                holder.itemView.card_main.setBackgroundResource(R.color.Lotte_card)
+                holder.itemView.card_form_Layout.setBackgroundResource(R.color.Lotte_card)
                 holder.itemView.card_paymentMethodNum_textView.setTextColor(Color.BLACK)
             }
             "농협" -> {
                 (holder as CardViewHolder).itemView.card_brand_ImageView.setImageResource(R.drawable.nh)
-                holder.itemView.card_main.setBackgroundResource(R.color.NH_card)
+                holder.itemView.card_form_Layout.setBackgroundResource(R.color.NH_card)
             }
             "시티" -> {
                 (holder as CardViewHolder).itemView.card_brand_ImageView.setImageResource(R.drawable.citi)
-                holder.itemView.card_main.setBackgroundResource(R.color.Citi_bank)
+                holder.itemView.card_form_Layout.setBackgroundResource(R.color.Citi_bank)
             }
             "카카오뱅크" -> {
                 (holder as CardViewHolder).itemView.card_brand_ImageView.setImageResource(R.drawable.kakao)
-                holder.itemView.card_main.setBackgroundResource(R.color.Kakao_bank)
+                holder.itemView.card_form_Layout.setBackgroundResource(R.color.Kakao_bank)
                 holder.itemView.card_paymentMethodNum_textView.setTextColor(Color.DKGRAY)
                 holder.itemView.card_pay_type.setTextColor(Color.BLACK)
             }

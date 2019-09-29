@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/shop_cardView"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="320dp"
         android:background="@drawable/shadow"
         android:orientation="vertical"
         app:cardElevation="16dp"
@@ -78,26 +78,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--<LinearLayout-->
-            <!--android:id="@+id/bottom_sheet"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--app:behavior_hideable="false"-->
-            <!--app:behavior_peekHeight="70dp"-->
-            <!--app:layout_behavior="@string/bottom_sheet_behavior"-->
-            <!--tools:layout_editor_absoluteY="659dp">-->
-
-            <!--<androidx.recyclerview.widget.RecyclerView-->
-                <!--android:id="@+id/map_recyclerView"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="bottom"-->
-                <!--android:background="#ffffff"-->
-                <!--app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
-
-        <!--</LinearLayout>-->
     </androidx.cardview.widget.CardView>
 
 

@@ -137,8 +137,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 Log.e("cur Lat Lng", "" + currentLatLng)
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng,17f))
                 placeMarkerOnMap(currentLatLng)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 17f))
 
                 requestLocation = ShopListRequest(currentLatLng.latitude, currentLatLng.longitude)
                 //가맹점 리스트 받기

@@ -1,6 +1,7 @@
 package com.seoul.app.zeropay_client.ui
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,6 +41,9 @@ class EnrollCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
+        val prefs = requireContext().getSharedPreferences("UserMno", Context.MODE_PRIVATE)
+        val getMno = prefs.getInt("UserMno", 0)
+
         val bankArray = resources.getStringArray(com.seoul.app.zeropay_client.R.array.bank)
         val spinnerAdapter = ArrayAdapter(
             requireActivity(),
@@ -61,14 +65,14 @@ class EnrollCardFragment : Fragment() {
             val inputCardNum = makeCardNumber(numArray)
             if (validCardNum(inputCardNum)){
                 enrollCardRequest = EnrollCardRequest(
-                    10,
+                    getMno,
                     inputCardNum,
                     card_nickName_edit_text.text.toString(),
                     bank_spinner.selectedItem.toString()
                 )
                 viewModel.registerUserCard(enrollCardRequest)
                 Toast.makeText(requireContext(), "카드가 성공적으로 등록되었습니다.", Toast.LENGTH_SHORT).show()
-                fragmentManager?.beginTransaction()?.remove(this)?.commit()
+                requireActivity().supportFragmentManager.popBackStack()
             }else{
                 Toast.makeText(requireContext(), "카드번호를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
             }

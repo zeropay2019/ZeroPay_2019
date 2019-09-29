@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#ffffff"
-                    android:backgroundTint="#F0F0F0"
+                    app:backgroundTint="#F0F0F0"
                     android:src="@drawable/add_plus_24dp" />
 
             </LinearLayout>
