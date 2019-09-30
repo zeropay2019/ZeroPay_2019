@@ -84,7 +84,6 @@ class FindIdFragment : Fragment() {
                     ) {
                         if (response.isSuccessful) {
                             if (response.body() != null) {
-                                Log.e("Find id response-> ", "" + response.body().toString())
                                 if (response.body()!!.resultCode == 102) {
                                     findId_result_textView.text = response.body()!!.message
                                     findId_result_textView.visibility = View.VISIBLE

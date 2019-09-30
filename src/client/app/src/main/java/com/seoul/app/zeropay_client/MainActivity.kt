@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() , DecoratedBarcodeView.TorchListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.e("get Intent mno -> ",""+intent.getIntExtra("mno",0))
         val userMno = intent.getIntExtra("mno",0)
         val prefs = applicationContext.getSharedPreferences("UserMno", Context.MODE_PRIVATE)
         val editor = prefs!!.edit()

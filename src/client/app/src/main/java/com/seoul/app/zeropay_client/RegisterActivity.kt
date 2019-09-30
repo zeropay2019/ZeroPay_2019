@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -44,34 +45,40 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         register_complete_button.setOnClickListener {
+            val id = id_edit_text.text.toString()
+            val name = name_edit_text.text.toString()
+            val pwd = password_edit_text.text.toString()
+            val phone = phone_edit_text.text.toString()
+            val payPwd = viewModel.payPwd.value.toString()
+            val address = address_edit_text.text.toString()
+            val email = email_edit_text.text.toString()
 
-            requestRegisterUser = RegisterUserRequest(
-                id = id_edit_text.text.toString(),
-                name = name_edit_text.text.toString(),
-                pwd = password_edit_text.text.toString(),
-                phone = phone_edit_text.text.toString(),
-                payPwd = viewModel.payPwd.value.toString(),
-                address = address_edit_text.text.toString(),
-                email = email_edit_text.text.toString()
-            )
+            if (id.isEmpty() || name.isEmpty() || pwd.isEmpty() || phone.isEmpty() || payPwd.isEmpty() || address.isEmpty() || email.isEmpty()) {
+                Toast.makeText(applicationContext, "정보를 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
+            } else {
+                requestRegisterUser = RegisterUserRequest(
+                    id, name, pwd, phone, payPwd, address, email
+                )
 
-            userRequest.requestRegistration(requestRegisterUser).enqueue(object : Callback<ServerResponse<Any>> {
-                override fun onFailure(call: Call<ServerResponse<Any>>, t: Throwable) {
-                    Log.e("register server fail", "" + t.toString())
-                }
-
-                override fun onResponse(
-                    call: Call<ServerResponse<Any>>,
-                    response: Response<ServerResponse<Any>>
-                ) {
-                    if (response.isSuccessful) {
-                        if (response.body() != null) {
-                            Log.e("register server Response -> ", "" + response.body())
-                            finish()
+                userRequest.requestRegistration(requestRegisterUser)
+                    .enqueue(object : Callback<ServerResponse<Any>> {
+                        override fun onFailure(call: Call<ServerResponse<Any>>, t: Throwable) {
+                            Log.e("register server fail", "" + t.toString())
                         }
-                    }
-                }
-            })
+
+                        override fun onResponse(
+                            call: Call<ServerResponse<Any>>,
+                            response: Response<ServerResponse<Any>>
+                        ) {
+                            if (response.isSuccessful) {
+                                if (response.body() != null) {
+                                    Log.e("register server Response -> ", "" + response.body())
+                                    finish()
+                                }
+                            }
+                        }
+                    })
+            }
         }
 
         transaction_password_button.setOnClickListener {

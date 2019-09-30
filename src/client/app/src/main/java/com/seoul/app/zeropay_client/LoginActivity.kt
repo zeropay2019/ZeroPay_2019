@@ -51,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
                             }else{
                                 Toast.makeText(applicationContext, "아이디 혹은 비밀번호를 확인해주세요",Toast.LENGTH_SHORT).show()
                             }
-                            Log.e("Login response mno-> ",""+ response.body()!!.param?.mno)
                         }
                     }
                 }
