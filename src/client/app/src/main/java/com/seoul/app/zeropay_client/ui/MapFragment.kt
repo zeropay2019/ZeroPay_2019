@@ -33,6 +33,9 @@ import com.seoul.app.zeropay_client.model.MapViewModel
 import com.seoul.app.zeropay_client.network.request.ShopListRequest
 import com.seoul.app.zeropay_client.network.response.ShopListResponse
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
+import kotlin.math.acos
+import kotlin.math.cos
+import kotlin.math.sin
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -42,15 +45,19 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
         private const val REQUEST_CHECK_SETTINGS = 2
     }
+
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
     private lateinit var requestLocation: ShopListRequest
     private var locationUpdateState = false
-    private lateinit var shopListAdapter : ShopListAdapter
+    private lateinit var shopListAdapter: ShopListAdapter
 
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var lastLocation: Location
+
+    private lateinit var lastLocForDistance: Location
+    private var distanceList = ArrayList<Double>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +70,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
                 lastLocation = locationResult.lastLocation
-                Log.e("locationCallback","called")
+                Log.e("locationCallback", "called")
             }
         }
         return inflater.inflate(R.layout.fragment_map, container, false)
@@ -77,23 +84,39 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             mMap.animateCamera(CameraUpdateFactory.newLatLng(clickedShopPosition))
         }
         map_recyclerView.adapter = shopListAdapter
-        map_recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        map_recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         createLocationRequest()
 
-        viewModel.responseShopList.observe(this, Observer {
-            if (it.isNotEmpty()){
-                shopListAdapter.updateMap(it)
-                addShopMarker(it)
+        viewModel.responseShopList.observe(this, Observer { shopData ->
+            if (shopData.isNotEmpty()) {
+                shopDistanceList(lastLocation, shopData)
+                shopListAdapter.updateMap(shopData)
+                addShopMarker(shopData)
             }
         })
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onMarkerClick(clickedMarker: Marker?): Boolean{
+    private fun shopDistanceList(
+        curLocation: Location,
+        shop: ArrayList<ShopListResponse>
+    ) {
+        for (i in shop) {
+            distanceList.add(getDistance(curLocation.latitude, curLocation.longitude, i.lat, i.lon))
+        }
+        shopListAdapter.updateDistance(distanceList)
+    }
+
+    override fun onMarkerClick(clickedMarker: Marker?): Boolean {
         clickedMarker?.showInfoWindow()
         return true
     }
@@ -111,8 +134,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         markerOnCircle(location)
     }
 
-    private fun markerOnCircle(location: LatLng){
-        val circle = CircleOptions().center(location).radius(600.0).strokeWidth(1f).strokeColor(Color.parseColor("#3E0027FF")).fillColor(Color.parseColor("#190027FF"))
+    private fun markerOnCircle(location: LatLng) {
+        val circle = CircleOptions().center(location).radius(600.0).strokeWidth(1f)
+            .strokeColor(Color.parseColor("#3E0027FF")).fillColor(Color.parseColor("#190027FF"))
         mMap.addCircle(circle)
     }
 
@@ -137,10 +161,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 Log.e("cur Lat Lng", "" + currentLatLng)
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng,17f))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 17f))
                 placeMarkerOnMap(currentLatLng)
 
                 requestLocation = ShopListRequest(currentLatLng.latitude, currentLatLng.longitude)
+                lastLocForDistance = location
                 //가맹점 리스트 받기
                 viewModel.getShopList(requestLocation)
             }
@@ -167,9 +192,16 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         )
     }
 
-    private fun addShopMarker(shopList: ArrayList<ShopListResponse>){
-        for (item in shopList){
-            mMap.addMarker(MarkerOptions().title(item.marketName).position(LatLng(item.lat,item.lon)))
+    private fun addShopMarker(shopList: ArrayList<ShopListResponse>) {
+        for (item in shopList) {
+            mMap.addMarker(
+                MarkerOptions().title(item.marketName).position(
+                    LatLng(
+                        item.lat,
+                        item.lon
+                    )
+                )
+            )
         }
     }
 
@@ -223,6 +255,28 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         if (!locationUpdateState) {
             startLocationUpdates()
         }
+    }
+
+    private fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val theta = lon1 - lon2
+        var dist =
+            sin(degRad(lat1)) * sin(degRad(lat2)) + cos(degRad(lat1)) * cos(degRad(lat2)) * cos(
+                degRad(theta)
+            )
+
+        dist = acos(dist)
+        dist = radDeg(dist)
+        dist *= 60 * 1.1515
+        dist *= 1609.344
+        return dist
+    }
+
+    private fun degRad(deg: Double): Double {
+        return (deg * Math.PI / 180.0)
+    }
+
+    private fun radDeg(rad: Double): Double {
+        return (rad * 180 / Math.PI)
     }
 
 
