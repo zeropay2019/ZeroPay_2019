@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="action_list">
+        <item>action 1</item>
+        <item>action 2</item>
+        <item>action 3</item>
+        <item>action 4</item>
+    </string-array>
+    <string-array name="action_values">
+        <item>value 1</item>
+        <item>value 2</item>
+        <item>value 3</item>
+        <item>value 4</item>
+    </string-array>
+
+
+    <string-array name="bank">
+        <item>신한</item>
+        <item>삼성</item>
+        <item>현대</item>
+        <item>BC</item>
+        <item>KB국민</item>
+        <item>하나</item>
+        <item>롯데</item>
+        <item>NH농협</item>
+        <item>시티</item>
+        <item>카카오뱅크</item>
+    </string-array>
+
+</resources>

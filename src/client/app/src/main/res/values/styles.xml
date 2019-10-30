@@ -1,0 +1,103 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="colorControlActivated">@color/colorControlActivated</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ZeroPay.ToolBar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">#ffffff</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="Widget.ZeroPay.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextAppearance">
+            @style/TextAppearance.ZeroPay.TextInputLayout.HintText
+        </item>
+        <item name="boxStrokeColor">#313463</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColorHint">#777777</item>
+    </style>
+
+    <style name="TextAppearance.ZeroPay.TextInputLayout.HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">#777777</item>
+    </style>
+
+    <style name="Widget.ZeroPay.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="backgroundTint">?attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="Widget.ZeroPay.Button2" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">#21237E</item>
+    </style>
+
+    <style name="Widget.ZeroPay.Button3" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">#D50000</item>
+    </style>
+
+    <style name="Widget.ZeroPay.Button4" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">17sp</item>
+        <item name="backgroundTint">#57B836</item>
+    </style>
+
+    <style name="Widget.ZeroPay.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#777777</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">#ffffff</item>
+        <item name="rippleColor">#D6D6D6</item>
+    </style>
+
+    <style name="Widget.ZeroPay.Button.Transaction.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">#777777</item>
+        <item name="rippleColor">#D6D6D6</item>
+    </style>
+
+    <style name="Widget.ZeroPay.Button.Transaction.Complete.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">#364188</item>
+        <item name="rippleColor">#D6D6D6</item>
+    </style>
+
+    <style name="Widget.ZeroPay.Button.Transaction.Cancel.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">#BE1919</item>
+        <item name="rippleColor">#D6D6D6</item>
+    </style>
+
+    <style name="Widget.ZeroPay.Button.Transaction" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#777777</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:background">#ffffff</item>
+        <item name="rippleColor">#D6D6D6</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+    defaultConfig {
+        applicationId "com.seoul.app.zeropay_client"
+        minSdkVersion 24
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
+    useLibrary 'android.test.mock'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //google map
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    //lifecycle & navigation
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+    //retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    //recycler view
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta03'
+    //material design
+    implementation 'com.google.android.material:material:1.1.0-alpha09'
+    //google map
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    //anko
+    implementation 'org.jetbrains.anko:anko:0.10.8'
+    //preference
+    implementation 'androidx.preference:preference:1.1.0-rc01'
+    //viewpager2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0-beta04'
+    //qr_code
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    //carouselview
+    implementation 'com.synnapps:carouselview:0.1.5'
+    //expandable view
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+    //room
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+    kaptTest "android.arch.persistence.room:testing:1.1.1"
+    implementation 'androidx.cardview:cardview:1.0.0'
+}

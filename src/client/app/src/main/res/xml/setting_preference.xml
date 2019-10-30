@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#00FFFFFF">
+
+    <PreferenceCategory
+        android:title="Functions"
+        app:iconSpaceReserved="false">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:icon="@drawable/password_24dp"
+            android:key="key_add_shortcut"
+            android:title="비밀번호 저장" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:icon="@drawable/autologin_24dp"
+            android:key="key_switch_on"
+            android:title="자동로그인" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Options"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:dialogTitle="비밀번호 찾기"
+            android:key="key_edit_name"
+            android:summary="Find your Password"
+            android:title="비밀번호 찾기"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:dialogTitle="set main action"
+            android:entries="@array/action_list"
+            android:entryValues="@array/action_values"
+            android:key="key_set_item"
+            android:summary="Find your ID"
+            android:title="아이디 찾기"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:summary="www.zeropay.or.kr"
+            android:title="제로페이 홈페이지"
+            app:iconSpaceReserved="false">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://www.zeropay.or.kr/main.do" />
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:summary="v1.0.0"
+            android:title="버전 정보"
+            app:iconSpaceReserved="false"></PreferenceScreen>
+
+
+    </PreferenceCategory>
+</androidx.preference.PreferenceScreen>
