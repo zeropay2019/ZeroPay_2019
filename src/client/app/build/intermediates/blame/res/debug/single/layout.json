@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/parkjunghun/Dev/ZeroPay/ZeroPay_2019/src/client/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_transaction_pw.xml",
+        "source": "/Users/parkjunghun/Dev/ZeroPay/ZeroPay_2019/src/client/app/src/main/res/layout/fragment_transaction_pw.xml"
+    },
+    {
+        "merged": "/Users/parkjunghun/Dev/ZeroPay/ZeroPay_2019/src/client/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/register_viewpager_item.xml",
+        "source": "/Users/parkjunghun/Dev/ZeroPay/ZeroPay_2019/src/client/app/src/main/res/layout/register_viewpager_item.xml"
+    }
+]

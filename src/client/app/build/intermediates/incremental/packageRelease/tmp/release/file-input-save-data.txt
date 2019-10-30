@@ -1,0 +1,11 @@
+#Internal package file, do not edit.
+#Mon Sep 30 17:58:50 KST 2019
+1.base=/Users/parkjunghun/Dev/ZeroPay/ZeroPay_2019/src/client/app/build/intermediates/dex/release/mergeDexRelease/out
+0.baseType=DIRECTORY
+1.baseType=DIRECTORY
+count=2
+1.set=DEX
+0.path=classes.dex
+0.set=DEX
+0.base=/Users/parkjunghun/Dev/ZeroPay/ZeroPay_2019/src/client/app/build/intermediates/dex/release/mergeDexRelease/out
+1.path=classes2.dex

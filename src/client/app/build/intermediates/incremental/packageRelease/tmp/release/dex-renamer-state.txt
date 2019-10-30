@@ -1,0 +1,7 @@
+#Mon Sep 30 17:58:50 KST 2019
+base.0=/Users/parkjunghun/Dev/ZeroPay/ZeroPay_2019/src/client/app/build/intermediates/dex/release/mergeDexRelease/out
+path.1=classes2.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=/Users/parkjunghun/Dev/ZeroPay/ZeroPay_2019/src/client/app/build/intermediates/dex/release/mergeDexRelease/out
