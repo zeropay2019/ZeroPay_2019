@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seoul.zero.app.model.mapper.MarketMapper">
+    <select id="marketList" parameterType="com.seoul.zero.app.model.vo.Market" resultType="com.seoul.zero.app.model.vo.Market">
+        <![CDATA[
+            select * from (select marketName, address, category,lat, lon, DISTNACE_WGS84(#{lat}, #{lon}, lat, lon) as DISTANCE
+            from market where (lat between #{lat}-0.002 and #{lat}+0.002) and (lon between #{lon}-0.002 and #{lon}+0.002) order by DISTANCE) TMP
+            ]]>
+    </select>
+</mapper>
+
+<!--
+위도 경도 계산 함수
+CREATE OR REPLACE FUNCTION RADIANS(nDegrees IN NUMBER)
+RETURN NUMBER DETERMINISTIC
+IS
+BEGIN
+  /*
+  radians = degrees / (180 / pi)
+  RETURN nDegrees / (180 / ACOS(-1)); but 180/pi is a constant, so...
+  */
+  RETURN nDegrees / 57.29577951308232087679815481410517033235;
+END RADIANS;
+
+create or replace function DISTNACE_WGS84( H_LAT in number, H_LNG in number, T_LAT in number, T_LNG in number)
+return number deterministic
+is
+begin
+  return ( 6371.0 * acos(
+          cos( radians( H_LAT ) )*cos( radians( T_LAT /* 위도 */ ) )
+          *cos( radians( T_LNG /* 경도 */ )-radians( H_LNG ) )
+          +
+          sin( radians( H_LAT ) )*sin( radians( T_LAT /* 위도 */ ) )
+         ));
+end DISTNACE_WGS84;
+
+-->

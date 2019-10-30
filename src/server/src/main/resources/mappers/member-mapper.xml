@@ -6,9 +6,13 @@
         select count(*) from member where id=#{id} and pwd=#{pwd}
     </select>
 
+    <select id="memberInfo" parameterType="com.seoul.zero.app.model.vo.Member" resultType="com.seoul.zero.app.model.vo.Member">
+        select * from member where id=#{id}
+    </select>
+
     <insert id="register" parameterType="com.seoul.zero.app.model.vo.Member">
         insert into member values(mno_seq.nextval, #{id} ,#{name}, #{pwd}, #{phone},
-        #{payPwd, jdbcType=VARCHAR}, #{country, jdbcType=VARCHAR}, #{address, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR})
+        #{payPwd}, #{address}, #{email})
     </insert>
 
     <select id="searchId" parameterType="com.seoul.zero.app.model.vo.Member" resultType="java.lang.String">
@@ -18,4 +22,16 @@
     <select id="searchPw" parameterType="com.seoul.zero.app.model.vo.Member" resultType="java.lang.String">
         select pwd from member where id=#{id} and name=#{name} and phone=#{phone}
     </select>
+
+    <insert id="enrollCard" parameterType="com.seoul.zero.app.model.vo.request.EnrollCard">
+        insert into card values(#{mno}, #{cardNumber}, #{nick}, #{company})
+    </insert>
+
+    <select id="searchCard" parameterType="com.seoul.zero.app.model.vo.response.Card" resultType="com.seoul.zero.app.model.vo.response.Card">
+        select * from card where mno=#{mno}
+    </select>
+
+    <delete id="deleteCard" parameterType="com.seoul.zero.app.model.vo.response.Card">
+        delete from card where mno=#{mno} and cardNumber=#{cardNumber}
+    </delete>
 </mapper>
