@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#00FFFFFF">
 
     <PreferenceCategory
         android:title="Functions"
@@ -26,10 +26,10 @@
         app:iconSpaceReserved="false">
 
         <EditTextPreference
-            android:dialogTitle="결제비밀번호 재설정"
+            android:dialogTitle="비밀번호 찾기"
             android:key="key_edit_name"
-            android:summary="Edit your Transaction Password"
-            android:title="Edit name"
+            android:summary="Find your Password"
+            android:title="비밀번호 찾기"
             app:iconSpaceReserved="false" />
 
         <ListPreference
@@ -37,8 +37,8 @@
             android:entries="@array/action_list"
             android:entryValues="@array/action_values"
             android:key="key_set_item"
-            android:summary="set main action"
-            android:title="Main action"
+            android:summary="Find your ID"
+            android:title="아이디 찾기"
             app:iconSpaceReserved="false" />
 
         <PreferenceScreen
@@ -53,8 +53,7 @@
         <PreferenceScreen
             android:summary="v1.0.0"
             android:title="버전 정보"
-            app:iconSpaceReserved="false">
-        </PreferenceScreen>
+            app:iconSpaceReserved="false"></PreferenceScreen>
 
 
     </PreferenceCategory>

@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object UserRepository {
-    private const val BASE_URL = "http://192.168.0.127:8090/mem/"
+    private const val BASE_URL = "http://13.209.19.33:8090/"
 
     private lateinit var userApiImpl: UserApi
 

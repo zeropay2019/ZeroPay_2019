@@ -3,18 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.MapFragment">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        tools:context=".MapsActivity" />
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/map_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        <include
+            android:id="@+id/bottom_sheet"
+            layout="@layout/bottom_sheet_layout"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 
 </FrameLayout>

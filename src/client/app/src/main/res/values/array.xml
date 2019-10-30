@@ -12,4 +12,19 @@
         <item>value 3</item>
         <item>value 4</item>
     </string-array>
+
+
+    <string-array name="bank">
+        <item>신한</item>
+        <item>삼성</item>
+        <item>현대</item>
+        <item>BC</item>
+        <item>KB국민</item>
+        <item>하나</item>
+        <item>롯데</item>
+        <item>NH농협</item>
+        <item>시티</item>
+        <item>카카오뱅크</item>
+    </string-array>
+
 </resources>

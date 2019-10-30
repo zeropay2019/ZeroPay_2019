@@ -1,7 +1,9 @@
 package com.seoul.app.zeropay_client
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,44 +24,55 @@ class MainActivity : AppCompatActivity() , DecoratedBarcodeView.TorchListener {
 
     }
 
+    private var backPressedTime:Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragment = HomeFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.container_frame, fragment, fragment.javaClass.getSimpleName())
+        val userMno = intent.getIntExtra("mno",0)
+        val prefs = applicationContext.getSharedPreferences("UserMno", Context.MODE_PRIVATE)
+        val editor = prefs!!.edit()
+        editor.putInt("UserMno", userMno).apply()
+
+        val homeFragment = HomeFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.container_frame, homeFragment)
             .commit()
+
+        val mapFragment = MapFragment()
+        val infoFragment = InfoFragment()
+        val settingFragment = SettingFragment()
 
         bottomNav.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.action_first -> {
-                    val homeFragment = HomeFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, homeFragment, fragment.javaClass.getSimpleName())
+                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, homeFragment)
                         .commit()
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.action_second -> {
-                    val mapFragment = MapFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, mapFragment, fragment.javaClass.getSimpleName())
+                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, mapFragment)
                         .commit()
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.action_third -> {
-                    val infoFragment = InfoFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, infoFragment, fragment.javaClass.getSimpleName())
+                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, infoFragment)
                         .commit()
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.action_fourth -> {
-                    val settingFragment = SettingFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, settingFragment, fragment.javaClass.getSimpleName())
+                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, settingFragment)
                         .commit()
                     return@setOnNavigationItemSelectedListener true
                 }
             }
             false
         }
+
+        val handler = Handler()
     }
+
+    class MyThread : Thread(Runnable {})
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == IntentIntegrator.REQUEST_CODE) {
@@ -71,6 +84,18 @@ class MainActivity : AppCompatActivity() , DecoratedBarcodeView.TorchListener {
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    override fun onBackPressed() {
+        val tempTime: Long = System.currentTimeMillis()
+        val intervalTime = tempTime - backPressedTime
+
+        if (intervalTime in 0..2000){
+            super.onBackPressed()
+        }else{
+            backPressedTime = tempTime
+            Toast.makeText(applicationContext, "뒤로가려면 한번 더 눌러주세요", Toast.LENGTH_SHORT).show()
         }
     }
 }
