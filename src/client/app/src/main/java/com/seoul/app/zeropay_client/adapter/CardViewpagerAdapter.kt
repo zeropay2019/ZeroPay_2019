@@ -21,9 +21,10 @@ class CardViewpagerAdapter(
         this.cardInfoList.clear()
         this.cardInfoList.add(0, null)
         this.cardInfoList.addAll(cardInfoList)
-        Log.e("adapter update card ",""+cardInfoList)
         notifyDataSetChanged()
     }
+
+
     companion object {
         const val ADD_CARD_VIEW_TYPE = 1
         const val USER_CARD_VIEW_TYPE = 2
@@ -33,13 +34,11 @@ class CardViewpagerAdapter(
         cardInfoList.add(0, null)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ADD_CARD_VIEW_TYPE -> {
                 val view = LayoutInflater.from(context)
                     .inflate(R.layout.add_card_layout, parent, false)
-                Log.e("card adapter ",""+cardInfoList)
                 AddCardViewHolder(itemView = view)
             }
 

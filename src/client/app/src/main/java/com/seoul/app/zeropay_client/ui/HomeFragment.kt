@@ -57,9 +57,9 @@ class HomeFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }, requireContext(), userCardList)
-
         //사용자 카드리스트
         add_card_viewpager.adapter = addCardAdapter
+
         add_card_viewpager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
             override fun onPageScrolled(
                 position: Int,

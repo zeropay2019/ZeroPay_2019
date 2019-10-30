@@ -44,7 +44,7 @@ class InfoFragment : Fragment() {
 
     private fun makeInfoData(): ArrayList<Info>{
         val list = ArrayList<Info>()
-        list.add(Info("제로페이모바일상품권 법인대량구매 안내","test"))
+        list.add(Info("제로페이모바일상품권 법인대량구매 안내","홈페이지에서 확인해주세요.(https://www.zeropay.or.kr/main.do?pgmId=PGM1579)"))
         list.add(Info("[온누리모바일상품권] 제로페이 앱에서 10% 할인된 가격으로 사고!쓰고! 선물하세요!","[온누리모바일상품권] 제로페이 앱에서 10% 할인된 가격으로 사고!쓰고!선물하세요!\n" +
                 "\n" +
                 " ▶ 기     간 : 2019.9.4.~\n" +

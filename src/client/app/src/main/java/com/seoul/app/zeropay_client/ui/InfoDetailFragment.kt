@@ -26,4 +26,5 @@ class InfoDetailFragment : Fragment() {
         info_detail_contents.text = (detailInfo as Info).contents
         info_detail_title.text = detailInfo.title
     }
+
 }

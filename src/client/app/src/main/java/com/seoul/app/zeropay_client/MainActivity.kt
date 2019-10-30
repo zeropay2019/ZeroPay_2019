@@ -3,6 +3,7 @@ package com.seoul.app.zeropay_client
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -42,7 +43,6 @@ class MainActivity : AppCompatActivity() , DecoratedBarcodeView.TorchListener {
         val infoFragment = InfoFragment()
         val settingFragment = SettingFragment()
 
-
         bottomNav.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.action_first -> {
@@ -68,7 +68,11 @@ class MainActivity : AppCompatActivity() , DecoratedBarcodeView.TorchListener {
             }
             false
         }
+
+        val handler = Handler()
     }
+
+    class MyThread : Thread(Runnable {})
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == IntentIntegrator.REQUEST_CODE) {
@@ -91,8 +95,7 @@ class MainActivity : AppCompatActivity() , DecoratedBarcodeView.TorchListener {
             super.onBackPressed()
         }else{
             backPressedTime = tempTime
-            Toast.makeText(applicationContext, "앱을 종료하려면 한번 더 눌러주세요", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "뒤로가려면 한번 더 눌러주세요", Toast.LENGTH_SHORT).show()
         }
-
     }
 }
